@@ -6,6 +6,7 @@ import logger from 'use-reducer-logger';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Product from './../Components/Product';
+import { Helmet } from 'react-helmet-async';
 
 const reducer = (state, action) => {
   switch (action.type) {
@@ -42,20 +43,25 @@ function HomeScreen() {
     fetchData();
   }, []);
   return (
-    <div className="products">
-      {loading ? (
-        <div>Loading...</div>
-      ) : error ? (
-        <div>{error}</div>
-      ) : (
-        <Row>
-          {products.map((product) => (
-            <Col key={product.id} sm={6} md={4} lg={3} className="mb-3">
-              <Product product={product}></Product>
-            </Col>
-          ))}
-        </Row>
-      )}
+    <div>
+      <Helmet>
+        <title>Amazone</title>
+      </Helmet>
+      <div className="products">
+        {loading ? (
+          <div>Loading...</div>
+        ) : error ? (
+          <div>{error}</div>
+        ) : (
+          <Row>
+            {products.map((product) => (
+              <Col key={product.id} sm={6} md={4} lg={3} className="mb-3">
+                <Product product={product}></Product>
+              </Col>
+            ))}
+          </Row>
+        )}
+      </div>
     </div>
   );
 }
